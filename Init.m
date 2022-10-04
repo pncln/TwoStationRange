@@ -1,9 +1,12 @@
-stationA = [40.46583 49.48842 0.207];
-stationB = [39.23728 45.55281 1.077];
-d1 = 37430;
-d2 = 37539;
+% ==== INPUTS ====
+stationA = [40.46583 49.48842 0.207]; % Station A Geodetic Coords
+stationB = [39.23728 45.55281 1.077]; % Station B Geodetic Coords
+d1 = 37430; % Distance between Station A and satellite
+d2 = 37539; % Distance between Station B and satellite
 % date = [2022 9 26 12 0 0]; % YEAR MONTH DAY HOUR MINUTE SECOND
-beta = 45.1;
+beta = 45.1; % West Position of Satellite
+sigma_s = 3.5; % Station Error
+% ================
 
 [ distKm, azimuth, altitude ] = Calculate( stationA, stationB, true );
 b = d1;
@@ -64,7 +67,6 @@ z1 = stationAecef(3);
 z2 = stationBecef(3);
 theta1 = elevA;
 theta2 = elevB;
-sigma_s = 3.5;
 
 E = [ 1/r1^2 0 0 0 0;
     0 1/r2^2 0 0 0;
