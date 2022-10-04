@@ -5,7 +5,7 @@ d1 = 37430; % Distance between Station A and satellite
 d2 = 37539; % Distance between Station B and satellite
 % date = [2022 9 26 12 0 0]; % YEAR MONTH DAY HOUR MINUTE SECOND
 beta = 45.1; % West Position of Satellite
-sigma_s = 3.5; % Station Error
+sigma_s = 0.01; % Station Error
 % ================
 
 [ distKm, azimuth, altitude ] = Calculate( stationA, stationB, true );
@@ -55,6 +55,9 @@ OriginToSat2 = stationB + d2ToSat;
 resA = norm(OriginToSat1);
 resB = norm(OriginToSat2);
 
+res(1) = mean([OriginToSat1(1) OriginToSat2(1)]);
+res(2) = mean([OriginToSat1(2) OriginToSat2(2)]);
+res(3) = mean([OriginToSat1(3) OriginToSat2(3)]);
 % ERROR
 r1 = d1;
 r2 = d2;
@@ -85,10 +88,8 @@ cprintf('green', "Elevation A: "); cprintf('text', elevA+ " [deg]\n");
 cprintf('green', "Elevation B: "); cprintf('text', elevB+ " [deg]\n");
 cprintf('green', "Result From SatA: "); cprintf('text', resA + " [km]\n");
 cprintf('green', "Result From SatB: "); cprintf('text', resB + " [km]\n");
-cprintf('green', "Satellite Coords (ECEF) [SatA]: \n");
-disp(OriginToSat1);
-cprintf('green', "Satellite Coords (ECEF) [SatB]: \n");
-disp(OriginToSat2);
-cprintf('green', "Error*: "); cprintf('text', P+ " [km]\n");
+cprintf('green', "Satellite Coords (ECEF): \n");
+disp(res);
+cprintf('green', "Error*: "); cprintf('text', P+ "\n");
 cprintf('key', "=============================================\n");
 
